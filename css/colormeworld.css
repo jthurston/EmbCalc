@@ -1,0 +1,52 @@
+body {
+    background-color: red;
+}
+
+.grey {
+    background-color: #ececec;
+}
+
+.black {
+    background-color: #000000;
+}
+
+.black-font {
+    color: #000000;
+    font-weight: bold;
+}
+
+.yellow-font {
+    color: #ffd000;
+}
+
+.blue-font {
+    color: #26A1F5;
+}
+
+.green-font {
+    color: #58AC00;
+}
+
+.pad-20-top-btm {
+    padding-top: 20px;
+    padding-bottom: 20px;
+}
+
+.italic-me {
+    font-style:italic
+}
+
+.header-wb {
+    color: white;
+    background-color: #000000;
+    font-weight: bold;
+    text-align: center;
+    font-size: 14pt;
+}
+
+.box-formula {
+    text-align: center;
+    font-weight: bold;
+    font-size: 12pt;
+    border: 1px solid grey;
+}

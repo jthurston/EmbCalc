@@ -1,0 +1,70 @@
+
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>EmbCalc</title>
+    <link rel="stylesheet" href="css/themes/emb.css" />
+    <link rel="stylesheet" href="css/themes/jquery.mobile.icons.min.css" />
+    <link rel="stylesheet" href="http://code.jquery.com/mobile/1.4.3/jquery.mobile.structure-1.4.3.min.css" />
+    <script src="http://code.jquery.com/jquery-1.11.1.min.js"></script>
+    <script src="http://code.jquery.com/mobile/1.4.3/jquery.mobile-1.4.3.min.js"></script></head>
+
+
+<body>
+
+<!-- Start of first page: #one -->
+<div data-role="page" id="one">
+
+    <div data-role="content" >
+        <label for="nos">Number of Stitches</label>
+        <input type="text" name="numofsti" id="nos" value="" placeholder="10,000"  />
+
+        <label for="noa">Number of Appliques</label>
+        <input type="text" name="numofapp" id="noa" value="" placeholder="1" />
+
+        <label for="bc">Blank Cost</label>
+        <input type="text" name="blacos" id="bc" value="" placeholder="0.00" />
+
+        <label for="dhc">Design/Hoop Cost</label>
+        <input type="text" name="deshoocos" id="dhc" value="" placeholder="0.00" />
+
+        <p><a href="#two" data-role="button">Calculate</a></p>
+        <p><a href="#popup" data-role="button" data-rel="dialog" data-transition="pop">Settings</a></p>
+    </div><!-- /content -->
+
+</div><!-- /page one -->
+
+
+<!-- Start of second page: #two -->
+<div data-role="page" id="two">
+
+    <div data-role="content">
+        <h2>Two</h2>
+
+        <p><a href="#one" data-direction="reverse" data-role="button" data-theme="b">Calculate Another</a></p>
+
+    </div><!-- /content -->
+
+</div><!-- /page two -->
+
+
+<!-- Start of third page: #popup -->
+<div data-role="page" id="popup">
+
+    <div data-role="header" data-theme="e">
+        <h1>Dialog</h1>
+    </div><!-- /header -->
+
+    <div data-role="content" data-theme="d">
+        <h2>Popup</h2>
+        <p>I have an id of "popup" on my page container and only look like a dialog because the link to me had a <code>data-rel="dialog"</code> attribute which gives me this inset look and a <code>data-transition="pop"</code> attribute to change the transition to pop. Without this, I'd be styled as a normal page.</p>
+        <p><a href="#one" data-rel="back" data-role="button" data-inline="true" data-icon="back">Apply Settings</a></p>
+    </div><!-- /content -->
+
+</div><!-- /page popup -->
+
+</body>
+</html>
