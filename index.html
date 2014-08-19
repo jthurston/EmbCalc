@@ -23,6 +23,13 @@
     var gvSc = .50;
     var gvAc = 1;
 
+
+    if (localStorage.getItem('gvSc') == null){
+        localStorage.setItem('gvBi', '.10');
+        localStorage.setItem('gvSc', '.50');
+        localStorage.setItem('gvAc', '1');
+    }
+
     function myFunction(p1, p2) {
         return p1 * p2;              // the function returns the product of p1 and p2
     }
@@ -33,14 +40,12 @@
         bc = $("#bc").val();
         dhc = $("#dhc").val();
 
-        var nosTotal = myFunction((nos/1000), gvSc);
-        var noaTotal = myFunction(noa, gvAc);
+        var nosTotal = myFunction((nos/1000), localStorage.getItem('gvSc'));
+        var noaTotal = myFunction(noa, localStorage.getItem('gvAc'));
         var bcTotal = myFunction(bc, 1);
         var dhcTotal = myFunction(dhc, 1);
-        var biTotal = bcTotal * gvBi;
+        var biTotal = bcTotal * localStorage.getItem('gvBi');
         var gTotal = nosTotal + noaTotal + bcTotal + dhcTotal + biTotal;
-
-        //alert(Number(gTotal).toFixed(2));
 
         $('#gTotal').text("$" + Number(gTotal).toFixed(2));
 
@@ -60,6 +65,21 @@
         $('#designhoopcost').text(Number(dhc).toFixed(2));
     }
 
+    function setglobals() {
+        gvSc = $("#cs").val();
+        gvAc = $("#ca").val();
+        gvBi = $("#bi").val();
+        localStorage.setItem('gvBi', gvBi);
+        localStorage.setItem('gvSc', gvSc);
+        localStorage.setItem('gvAc', gvAc);
+    }
+
+    function populatesettings() {
+        $("#cs").val(gvSc);
+        $("#ca").val(gvAc);
+        $("#bi").val(gvBi);
+    }
+
 </script>
 
 
@@ -69,6 +89,7 @@
 <div data-role="page" id="one">
 
     <div data-role="content" >
+
         <label for="nos">Number of Stitches</label>
         <input type="number" name="numofsti" id="nos" value="" placeholder="Enter actual stitch count"  >
 
@@ -87,7 +108,15 @@
                 calculate();
             });
         </script>
-        <p><a href="#popup" data-role="button" data-rel="dialog" data-transition="pop"><span class="icon-settings"></span> Settings</a></p>
+        <p><a href="#popup" data-role="button" data-rel="dialog" id="setme" data-transition="pop"><span class="icon-settings"></span> Settings</a></p>
+
+        <script>
+            $('#setme').click(function() {
+                populatesettings();
+            });
+        </script>
+
+
     </div><!-- /content -->
 
 </div><!-- /page one -->
@@ -138,7 +167,18 @@
         <label for="noa">Cost per Appliques</label>
         <input type="number" name="costapp" id="ca" value="5.00" >
 
-        <p><a href="#one" data-rel="back" data-role="button" data-inline="true" data-icon="back">Apply Settings</a></p>
+        <label for="bi">Percentage of Insurance</label>
+        <input type="number" name="costapp" id="bi" value=".10" >
+
+        <p><a href="#one" id="settings" data-rel="back" data-role="button" data-inline="true" data-icon="back">Apply Settings</a></p>
+
+        <script>
+            $('#settings').click(function() {
+                setglobals();
+            });
+        </script>
+
+
     </div><!-- /content -->
 
 </div><!-- /page popup -->
