@@ -56,16 +56,16 @@
 
     <div data-role="content" >
         <label for="nos">Number of Stitches</label>
-        <input type="text" name="numofsti" id="nos" value="" placeholder="10,000"  >
+        <input type="number" name="numofsti" id="nos" value="" placeholder="Enter actual stitch count"  >
 
         <label for="noa">Number of Appliques</label>
-        <input type="text" name="numofapp" id="noa" value="" placeholder="1" >
+        <input type="number" name="numofapp" id="noa" value="" placeholder="Enter number of applique" >
 
         <label for="bc">Blank Cost</label>
-        <input type="text" name="blacos" id="bc" value="" placeholder="0.00" >
+        <input type="number" name="blacos" id="bc" value="" placeholder="Cost of 1 blank" >
 
         <label for="dhc">Design/Hoop Cost</label>
-        <input type="text" name="deshoocos" id="dhc" value="" placeholder="0.00" >
+        <input type="number" name="deshoocos" id="dhc" value="" placeholder="Cost to hoop 1 item" >
 
         <p><a href="#two" data-role="button" id="calc" ><span class="icon-coin"></span> Calculate</a></p>
         <script>
@@ -103,12 +103,19 @@
 <div data-role="page" id="popup">
 
     <div data-role="header" data-theme="e">
-        <h1>Dialog</h1>
+        <h1>Settings</h1>
     </div><!-- /header -->
 
     <div data-role="content" data-theme="d">
-        <h2>Popup</h2>
-        <p>I have an id of "popup" on my page container and only look like a dialog because the link to me had a <code>data-rel="dialog"</code> attribute which gives me this inset look and a <code>data-transition="pop"</code> attribute to change the transition to pop. Without this, I'd be styled as a normal page.</p>
+        <h2>Global Costs</h2>
+
+        <label for="nos">Cost per 1,000 Stitches</label>
+        <input type="number" name="coststi" id="cs" value=".50"  >
+
+        <label for="noa">Cost per Appliques</label>
+        <input type="number" name="costapp" id="ca" value="5.00" >
+
+
         <p><a href="#one" data-rel="back" data-role="button" data-inline="true" data-icon="back">Apply Settings</a></p>
     </div><!-- /content -->
 
