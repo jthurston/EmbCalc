@@ -19,8 +19,9 @@
     var noa = 0;
     var bc = 0;
     var dhc = 0;
+    var gvBi= .10;
     var gvSc = .50;
-    var gvAc = 5;
+    var gvAc = 1;
 
     function myFunction(p1, p2) {
         return p1 * p2;              // the function returns the product of p1 and p2
@@ -36,14 +37,27 @@
         var noaTotal = myFunction(noa, gvAc);
         var bcTotal = myFunction(bc, 1);
         var dhcTotal = myFunction(dhc, 1);
-        var gTotal = nosTotal + noaTotal + bcTotal + dhcTotal;
+        var biTotal = bcTotal * gvBi;
+        var gTotal = nosTotal + noaTotal + bcTotal + dhcTotal + biTotal;
 
         //alert(Number(gTotal).toFixed(2));
 
-        $('#gTotal').text(Number(gTotal).toFixed(2));
+        $('#gTotal').text("$" + Number(gTotal).toFixed(2));
+
+        $('#stitches').text(nos);
+        $('#stitchcost').text(Number(gvSc).toFixed(2));
         $('#nosTotal').text(Number(nosTotal).toFixed(2));
+
+        $('#applique').text(noa);
+        $('#appliquecost').text(Number(gvAc).toFixed(2));
         $('#noaTotal').text(Number(noaTotal).toFixed(2));
-        $('#bcTotal').text(Number(bcTotal).toFixed(2));
+
+        $('#blankinsurance').text(Number(gvBi).toFixed(2));
+        $('#bitotal').text(Number(biTotal).toFixed(2));
+        $('#blankprice').text(Number(bc).toFixed(2));
+        $('#blankprice2').text(Number(bc).toFixed(2));
+
+        $('#designhoopcost').text(Number(dhc).toFixed(2));
     }
 
 </script>
@@ -80,17 +94,26 @@
 
 
 <!-- Start of second page: #two -->
-<div data-role="page" id="two">
+<div data-role="page" id="two" class="center">
 
     <div data-role="content">
-        <h1>Total Price</h1>
-        <span id="gTotal">Total</span>
-        <h3>Applique Total</h3>
-        <span id="noaTotal">Total</span>
-        <h3>Stitch Total</h3>
-        <span id="nosTotal">Total</span>
-        <h3>Blank Total</h3>
-        <span id="bcTotal">Total</span>
+        <h1 class="grey">Pricing</h1>
+        <span id="gTotal" class="price">Total</span>
+        <h1 class="grey price-desc">per item</h1>
+        <br>
+        <span id="stitches">stitches</span> stitches @ <span id="stitchcost">stitchcost</span> per 1,000 : $<span id="nosTotal">Total</span>
+        <br>
+        <br>
+        <span id="applique">applique(s)</span> applique(s) @ <span id="appliquecost">appliquecost</span> per 1 : $<span id="noaTotal">Total</span>
+        <br>
+        <br>
+        Price per blank : $<span id="blankprice">blankprice</span>
+        <br>
+        <br>
+        Blank insurance %<span id="blankinsurance">bi</span> of <span id="blankprice2">blankprice</span> : $<span id="bitotal">bitotal</span>
+        <br>
+        <br>
+        Design/Hoop Cost: $<span id="designhoopcost">dhc</span>
 
         <p><a href="#one" data-direction="reverse" data-role="button" data-theme="b"><span class="icon-pencil"></span> Calculate Another</a></p>
 
@@ -114,7 +137,6 @@
 
         <label for="noa">Cost per Appliques</label>
         <input type="number" name="costapp" id="ca" value="5.00" >
-
 
         <p><a href="#one" data-rel="back" data-role="button" data-inline="true" data-icon="back">Apply Settings</a></p>
     </div><!-- /content -->

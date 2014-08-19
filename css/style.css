@@ -33,3 +33,23 @@
 	content: "\e602";
 }
 
+.grey {
+    color: #dcdcdc;
+    text-shadow: none;
+}
+
+
+.center {
+    text-align: center;
+}
+
+.price {
+    font-size: 50pt;
+    font-weight: bolder;
+    line-height: .2em;
+}
+
+.price-desc {
+    line-height: .2em;
+}
+
