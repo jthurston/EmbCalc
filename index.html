@@ -19,15 +19,15 @@
     var noa = 0;
     var bc = 0;
     var dhc = 0;
-    var gvBi= .10;
-    var gvSc = .50;
-    var gvAc = 1;
+    //var gvBi= .10;
+    //var gvSc = .50;
+    //var gvAc = 1;
 
 
     if (localStorage.getItem('gvSc') == null){
         localStorage.setItem('gvBi', '.10');
         localStorage.setItem('gvSc', '.50');
-        localStorage.setItem('gvAc', '1');
+        localStorage.setItem('gvAc', '1.00');
     }
 
     function myFunction(p1, p2) {
@@ -72,12 +72,13 @@
         localStorage.setItem('gvBi', gvBi);
         localStorage.setItem('gvSc', gvSc);
         localStorage.setItem('gvAc', gvAc);
+
     }
 
     function populatesettings() {
-        $("#cs").val(gvSc);
-        $("#ca").val(gvAc);
-        $("#bi").val(gvBi);
+        $("#cs").val(localStorage.getItem('gvSc'));
+        $("#ca").val(localStorage.getItem('gvAc'));
+        $("#bi").val(localStorage.getItem('gvBi'));
     }
 
 </script>
@@ -91,16 +92,16 @@
     <div data-role="content" >
 
         <label for="nos">Number of Stitches</label>
-        <input type="number" name="numofsti" id="nos" value="" placeholder="Enter actual stitch count"  >
+        <input type="number" name="numofsti" id="nos" value="" placeholder="Stitch count"  >
 
         <label for="noa">Number of Appliques</label>
-        <input type="number" name="numofapp" id="noa" value="" placeholder="Enter number of applique" >
+        <input type="number" name="numofapp" id="noa" value="" placeholder="Number or leave blank" >
 
         <label for="bc">Blank Cost</label>
-        <input type="number" name="blacos" id="bc" value="" placeholder="Cost of 1 blank" >
+        <input type="number" name="blacos" id="bc" value="" placeholder="Price or leave blank" >
 
         <label for="dhc">Design/Hoop Cost</label>
-        <input type="number" name="deshoocos" id="dhc" value="" placeholder="Cost to hoop 1 item" >
+        <input type="number" name="deshoocos" id="dhc" value="" placeholder="Cost or leave blank" >
 
         <p><a href="#two" data-role="button" id="calc" ><span class="icon-coin"></span> Calculate</a></p>
         <script>
@@ -123,24 +124,20 @@
 
 
 <!-- Start of second page: #two -->
-<div data-role="page" id="two" class="center">
+<div data-role="page" id="two">
 
-    <div data-role="content">
+    <div data-role="content" class="left">
         <h1 class="grey">Pricing</h1>
         <span id="gTotal" class="price">Total</span>
         <h1 class="grey price-desc">per item</h1>
         <br>
         <span id="stitches">stitches</span> stitches @ <span id="stitchcost">stitchcost</span> per 1,000 : $<span id="nosTotal">Total</span>
         <br>
-        <br>
         <span id="applique">applique(s)</span> applique(s) @ <span id="appliquecost">appliquecost</span> per 1 : $<span id="noaTotal">Total</span>
-        <br>
         <br>
         Price per blank : $<span id="blankprice">blankprice</span>
         <br>
-        <br>
         Blank insurance %<span id="blankinsurance">bi</span> of <span id="blankprice2">blankprice</span> : $<span id="bitotal">bitotal</span>
-        <br>
         <br>
         Design/Hoop Cost: $<span id="designhoopcost">dhc</span>
 
@@ -162,13 +159,13 @@
         <h2>Global Costs</h2>
 
         <label for="nos">Cost per 1,000 Stitches</label>
-        <input type="number" name="coststi" id="cs" value=".50"  >
+        <input type="number" name="coststi" id="cs"  >
 
         <label for="noa">Cost per Appliques</label>
-        <input type="number" name="costapp" id="ca" value="5.00" >
+        <input type="number" name="costapp" id="ca" >
 
         <label for="bi">Percentage of Insurance</label>
-        <input type="number" name="costapp" id="bi" value=".10" >
+        <input type="number" name="perins" id="bi"  >
 
         <p><a href="#one" id="settings" data-rel="back" data-role="button" data-inline="true" data-icon="back">Apply Settings</a></p>
 

@@ -53,3 +53,14 @@
     line-height: .2em;
 }
 
+.ui-input-text input {
+               font-size: 1.2em;
+}
+
+.ui-mobile label {
+    line-height: .75;
+}
+
+.details {
+    font-size: 11pt;
+}
