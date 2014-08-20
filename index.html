@@ -40,6 +40,7 @@
         bc = $("#bc").val();
         dhc = $("#dhc").val();
 
+
         var nosTotal = myFunction((nos/1000), localStorage.getItem('gvSc'));
         var noaTotal = myFunction(noa, localStorage.getItem('gvAc'));
         var bcTotal = myFunction(bc, 1);
@@ -50,14 +51,14 @@
         $('#gTotal').text("$" + Number(gTotal).toFixed(2));
 
         $('#stitches').text(nos);
-        $('#stitchcost').text(Number(gvSc).toFixed(2));
+        $('#stitchcost').text(Number(localStorage.getItem('gvSc')).toFixed(2));
         $('#nosTotal').text(Number(nosTotal).toFixed(2));
 
         $('#applique').text(noa);
-        $('#appliquecost').text(Number(gvAc).toFixed(2));
+        $('#appliquecost').text(Number(localStorage.getItem('gvAc')).toFixed(2));
         $('#noaTotal').text(Number(noaTotal).toFixed(2));
 
-        $('#blankinsurance').text(Number(gvBi).toFixed(2));
+        $('#blankinsurance').text(Number(localStorage.getItem('gvBi')).toFixed(2));
         $('#bitotal').text(Number(biTotal).toFixed(2));
         $('#blankprice').text(Number(bc).toFixed(2));
         $('#blankprice2').text(Number(bc).toFixed(2));
@@ -72,7 +73,6 @@
         localStorage.setItem('gvBi', gvBi);
         localStorage.setItem('gvSc', gvSc);
         localStorage.setItem('gvAc', gvAc);
-
     }
 
     function populatesettings() {
