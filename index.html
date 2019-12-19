@@ -10,19 +10,19 @@
     <link rel="stylesheet" href="css/themes/jquery.mobile.icons.min.css" />
     <link rel="stylesheet" href="http://code.jquery.com/mobile/1.4.3/jquery.mobile.structure-1.4.3.min.css" />
     <script src="http://code.jquery.com/jquery-1.11.1.min.js"></script>
-    <script src="http://code.jquery.com/mobile/1.4.3/jquery.mobile-1.4.3.min.js"></script></head>
+    <script src="http://code.jquery.com/mobile/1.4.3/jquery.mobile-1.4.3.min.js"></script>
+    <script src="embcalc.js"></script>
 
-    <link rel="stylesheet" href="css/style.css"></head>
+    <link rel="stylesheet" href="css/style.css">
+</head>
 
 <script>
     var nos = 0;
     var noa = 0;
     var bc = 0;
     var dhc = 0;
-    //var gvBi= .10;
-    //var gvSc = .50;
-    //var gvAc = 1;
-
+    var noi = 0;
+    
 
     if (localStorage.getItem('gvSc') == null){
         localStorage.setItem('gvBi', '.10');
@@ -39,7 +39,7 @@
         noa = $("#noa").val();
         bc = $("#bc").val();
         dhc = $("#dhc").val();
-
+        noi = $("#noi").val();
 
         var nosTotal = myFunction((nos/1000), localStorage.getItem('gvSc'));
         var noaTotal = myFunction(noa, localStorage.getItem('gvAc'));
@@ -47,8 +47,10 @@
         var dhcTotal = myFunction(dhc, 1);
         var biTotal = bcTotal * localStorage.getItem('gvBi');
         var gTotal = nosTotal + noaTotal + bcTotal + dhcTotal + biTotal;
+        var aTotal = gTotal * noi;
 
         $('#gTotal').text("$" + Number(gTotal).toFixed(2));
+        $('#aTotal').text("$" + Number(aTotal).toFixed(2) + " for " + noi + " item(s)");        
 
         $('#stitches').text(nos);
         $('#stitchcost').text(Number(localStorage.getItem('gvSc')).toFixed(2));
@@ -94,6 +96,9 @@
         <label for="nos">Number of Stitches</label>
         <input type="number" name="numofsti" id="nos" value="" placeholder="Stitch count"  >
 
+        <label for="noi">Number of Items</label>
+        <input type="number" name="numoitem" id="noi" value="1" placeholder="Number of items" >
+
         <label for="noa">Number of Appliques</label>
         <input type="number" name="numofapp" id="noa" value="" placeholder="Number or leave blank" >
 
@@ -101,35 +106,31 @@
         <input type="number" name="blacos" id="bc" value="" placeholder="Price or leave blank" >
 
         <label for="dhc">Design/Hoop Cost</label>
-        <input type="number" name="deshoocos" id="dhc" value="" placeholder="Cost or leave blank" >
+        <input type="number" name="deshoocos" id="dhc" value="" placeholder="Cost or leave blank" >        
 
-        <p><a href="#two" data-role="button" id="calc" ><span class="icon-coin"></span> Calculate</a></p>
+        <p><a href="#" data-role="button" id="calc" ><span class="icon-coin"></span> Calculate</a></p>
+        
         <script>
             $('#calc').click(function() {
                 calculate();
             });
         </script>
+    
         <p><a href="#popup" data-role="button" data-rel="dialog" id="setme" data-transition="pop"><span class="icon-settings"></span> Settings</a></p>
 
         <script>
+            
             $('#setme').click(function() {
                 populatesettings();
             });
         </script>
 
 
-    </div><!-- /content -->
-
-</div><!-- /page one -->
-
-
-<!-- Start of second page: #two -->
-<div data-role="page" id="two">
-
-    <div data-role="content" class="left">
         <h1 class="grey">Pricing</h1>
-        <span id="gTotal" class="price">Total</span>
+        <span id="gTotal" class="price">Total</span>        
         <h1 class="grey price-desc">per item</h1>
+        <br>
+        <h3 id="aTotal">(SUM)</h3>
         <br>
         <span id="stitches">stitches</span> stitches @ <span id="stitchcost">stitchcost</span> per 1,000 : $<span id="nosTotal">Total</span>
         <br>
@@ -140,11 +141,19 @@
         Blank insurance %<span id="blankinsurance">bi</span> of <span id="blankprice2">blankprice</span> : $<span id="bitotal">bitotal</span>
         <br>
         Design/Hoop Cost: $<span id="designhoopcost">dhc</span>
-
-        <p><a href="#one" data-direction="reverse" data-role="button" data-theme="b"><span class="icon-pencil"></span> Calculate Another</a></p>
+        <!--
+            <p><a href="#one" data-direction="reverse" data-role="button" data-theme="b"><span class="icon-pencil"></span> Calculate Another</a></p>
+        -->
 
     </div><!-- /content -->
 
+</div><!-- /page one -->
+
+
+<!-- Start of second page: #two -->
+<div data-role="page" id="two">
+
+    
 </div><!-- /page two -->
 
 
