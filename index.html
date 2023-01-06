@@ -91,6 +91,13 @@
 <!-- Start of first page: #one -->
 <div data-role="page" id="one">
 
+            <script>            
+            $('#setme').click(function() {
+                populatesettings();
+            });
+        </script>
+
+
     <div data-role="content" >
 
         <label for="nos">Number of Stitches</label>
@@ -117,13 +124,6 @@
         </script>
     
         <p><a href="#popup" data-role="button" data-rel="dialog" id="setme" data-transition="pop"><span class="icon-settings"></span> Settings</a></p>
-
-        <script>
-            
-            $('#setme').click(function() {
-                populatesettings();
-            });
-        </script>
 
 
         <h1 class="grey">Pricing</h1>
