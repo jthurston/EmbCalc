@@ -165,7 +165,7 @@
     </div><!-- /header -->
 
     <div data-role="content" data-theme="d">
-        <h2>Global Costs</h2>
+        <h2>Global Settings</h2>
 
         <label for="nos">Cost per 1,000 Stitches</label>
         <input type="number" name="coststi" id="cs" value="1">
@@ -176,7 +176,7 @@
         <label for="bi">Percentage of Insurance</label>
         <input type="number" name="perins" id="bi"  >
 
-        <p><a href="#one" id="settings" data-rel="back" data-role="button" data-inline="true" data-icon="back">Apply Settings</a></p>
+        <p><a href="#one" id="settings" data-rel="back" data-role="button" data-inline="true" data-icon="back" onclick="calculate()">Apply Settings</a></p>
 
         <script>
             $('#settings').click(function() {
