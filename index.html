@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html>
 
@@ -8,22 +7,23 @@
     <title>EmbCalc</title>
     <link rel="stylesheet" href="css/themes/emb.css" />
     <link rel="stylesheet" href="css/themes/jquery.mobile.icons.min.css" />
-    <link rel="stylesheet" href="http://code.jquery.com/mobile/1.4.3/jquery.mobile.structure-1.4.3.min.css" />
-    <script src="http://code.jquery.com/jquery-1.11.1.min.js"></script>
-    <script src="http://code.jquery.com/mobile/1.4.3/jquery.mobile-1.4.3.min.js"></script>
+    <link rel="stylesheet" href="https://code.jquery.com/mobile/1.4.3/jquery.mobile.structure-1.4.3.min.css" />
+    <script src="https://code.jquery.com/jquery-1.11.1.min.js"></script>
+    <script src="https://code.jquery.com/mobile/1.4.3/jquery.mobile-1.4.3.min.js"></script>
     <script src="embcalc.js"></script>
 
     <link rel="stylesheet" href="css/style.css">
 </head>
 
 <script>
+    //set variables and their default values    
     var nos = 0;
     var noa = 0;
     var bc = 0;
     var dhc = 0;
     var noi = 0;
     
-
+    
     if (localStorage.getItem('gvSc') == null){
         localStorage.setItem('gvBi', '.10');
         localStorage.setItem('gvSc', '.50');
@@ -165,18 +165,18 @@
     </div><!-- /header -->
 
     <div data-role="content" data-theme="d">
-        <h2>Global Settings</h2>
+        <h2>Global Costs</h2>
 
         <label for="nos">Cost per 1,000 Stitches</label>
-        <input type="number" name="coststi" id="cs" value="1">
+        <input type="number" name="coststi" id="cs"  >
 
         <label for="noa">Cost per Appliques</label>
-        <input type="number" name="costapp" id="ca" value="5">
+        <input type="number" name="costapp" id="ca" >
 
         <label for="bi">Percentage of Insurance</label>
         <input type="number" name="perins" id="bi"  >
 
-        <p><a href="#one" id="settings" data-rel="back" data-role="button" data-inline="true" data-icon="back" onclick="calculate()">Apply Settings</a></p>
+        <p><a href="#one" id="settings" data-rel="back" data-role="button" data-inline="true" data-icon="back">Apply Settings</a></p>
 
         <script>
             $('#settings').click(function() {
