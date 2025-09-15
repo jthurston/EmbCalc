@@ -1,193 +1,239 @@
 <!DOCTYPE html>
-<html>
-
+<html lang="en">
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>EmbCalc</title>
-    <link rel="stylesheet" href="css/themes/emb.css" />
-    <link rel="stylesheet" href="css/themes/jquery.mobile.icons.min.css" />
-    <link rel="stylesheet" href="https://code.jquery.com/mobile/1.4.3/jquery.mobile.structure-1.4.3.min.css" />
-    <script src="https://code.jquery.com/jquery-1.11.1.min.js"></script>
-    <script src="https://code.jquery.com/mobile/1.4.3/jquery.mobile-1.4.3.min.js"></script>
-    <script src="embcalc.js"></script>
-
-    <link rel="stylesheet" href="css/style.css">
+    <meta name="description" content="Embroidery price calculator for custom embroidery projects">
+    <title>EmbCalc - Embroidery Price Calculator</title>
+    
+    <!-- Modern CSS Framework or Custom CSS -->
+    <link rel="stylesheet" href="css/modern-style.css">
+    
+    <!-- Modern JavaScript (ES6+) -->
+    <script type="module" src="js/embcalc-modern.js"></script>
 </head>
 
-<script>
-    //set variables and their default values    
-    var nos = 0;
-    var noa = 0;
-    var bc = 0;
-    var dhc = 0;
-    var noi = 0;
-    
-    
-    if (localStorage.getItem('gvSc') == null){
-        localStorage.setItem('gvBi', '.10');
-        localStorage.setItem('gvSc', '.50');
-        localStorage.setItem('gvAc', '1.00');
-    }
-
-    function myFunction(p1, p2) {
-        return p1 * p2;              // the function returns the product of p1 and p2
-    }
-
-    function calculate() {
-        nos = $("#nos").val();
-        noa = $("#noa").val();
-        bc = $("#bc").val();
-        dhc = $("#dhc").val();
-        noi = $("#noi").val();
-
-        var nosTotal = myFunction((nos/1000), localStorage.getItem('gvSc'));
-        var noaTotal = myFunction(noa, localStorage.getItem('gvAc'));
-        var bcTotal = myFunction(bc, 1);
-        var dhcTotal = myFunction(dhc, 1);
-        var biTotal = bcTotal * localStorage.getItem('gvBi');
-        var gTotal = nosTotal + noaTotal + bcTotal + dhcTotal + biTotal;
-        var aTotal = gTotal * noi;
-
-        $('#gTotal').text("$" + Number(gTotal).toFixed(2));
-        $('#aTotal').text("$" + Number(aTotal).toFixed(2) + " for " + noi + " item(s)");        
-
-        $('#stitches').text(nos);
-        $('#stitchcost').text(Number(localStorage.getItem('gvSc')).toFixed(2));
-        $('#nosTotal').text(Number(nosTotal).toFixed(2));
-
-        $('#applique').text(noa);
-        $('#appliquecost').text(Number(localStorage.getItem('gvAc')).toFixed(2));
-        $('#noaTotal').text(Number(noaTotal).toFixed(2));
-
-        $('#blankinsurance').text(Number(localStorage.getItem('gvBi')).toFixed(2));
-        $('#bitotal').text(Number(biTotal).toFixed(2));
-        $('#blankprice').text(Number(bc).toFixed(2));
-        $('#blankprice2').text(Number(bc).toFixed(2));
-
-        $('#designhoopcost').text(Number(dhc).toFixed(2));
-    }
-
-    function setglobals() {
-        gvSc = $("#cs").val();
-        gvAc = $("#ca").val();
-        gvBi = $("#bi").val();
-        localStorage.setItem('gvBi', gvBi);
-        localStorage.setItem('gvSc', gvSc);
-        localStorage.setItem('gvAc', gvAc);
-    }
-
-    function populatesettings() {
-        $("#cs").val(localStorage.getItem('gvSc'));
-        $("#ca").val(localStorage.getItem('gvAc'));
-        $("#bi").val(localStorage.getItem('gvBi'));
-    }
-
-</script>
-
-
 <body>
+    <header>
+        <h1>EmbCalc</h1>
+        <nav>
+            <button id="settings-btn" aria-label="Open Settings">⚙️ Settings</button>
+        </nav>
+    </header>
 
-<!-- Start of first page: #one -->
-<div data-role="page" id="one">
+    <main>
+        <section class="calculator-form" aria-labelledby="calc-heading">
+            <h2 id="calc-heading">Embroidery Price Calculator</h2>
+            
+            <form id="embroidery-form" novalidate>
+                <div class="form-group">
+                    <label for="stitches-input">Number of Stitches *</label>
+                    <input 
+                        type="number" 
+                        id="stitches-input" 
+                        name="stitches"
+                        min="0"
+                        step="1"
+                        required
+                        aria-describedby="stitches-help"
+                        placeholder="e.g., 10000"
+                    >
+                    <small id="stitches-help">Total stitch count for the design</small>
+                    <span class="error-message" id="stitches-error" role="alert"></span>
+                </div>
 
-            <script>            
-            $('#setme').click(function() {
-                populatesettings();
-            });
-        </script>
+                <div class="form-group">
+                    <label for="items-input">Number of Items *</label>
+                    <input 
+                        type="number" 
+                        id="items-input" 
+                        name="items"
+                        min="1"
+                        step="1"
+                        value="1"
+                        required
+                        aria-describedby="items-help"
+                    >
+                    <small id="items-help">How many items to embroider</small>
+                    <span class="error-message" id="items-error" role="alert"></span>
+                </div>
 
+                <div class="form-group">
+                    <label for="appliques-input">Number of Appliqués</label>
+                    <input 
+                        type="number" 
+                        id="appliques-input" 
+                        name="appliques"
+                        min="0"
+                        step="1"
+                        placeholder="0"
+                        aria-describedby="appliques-help"
+                    >
+                    <small id="appliques-help">Optional: Number of appliqué pieces</small>
+                </div>
 
-    <div data-role="content" >
+                <div class="form-group">
+                    <label for="blank-cost-input">Blank Item Cost</label>
+                    <div class="input-wrapper">
+                        <span class="currency-symbol">$</span>
+                        <input 
+                            type="number" 
+                            id="blank-cost-input" 
+                            name="blankCost"
+                            min="0"
+                            step="0.01"
+                            placeholder="0.00"
+                            aria-describedby="blank-cost-help"
+                        >
+                    </div>
+                    <small id="blank-cost-help">Cost per blank item (shirt, hat, etc.)</small>
+                </div>
 
-        <label for="nos">Number of Stitches</label>
-        <input type="number" name="numofsti" id="nos" value="10000" placeholder="Stitch count"  >
+                <div class="form-group">
+                    <label for="design-cost-input">Design/Setup Cost</label>
+                    <div class="input-wrapper">
+                        <span class="currency-symbol">$</span>
+                        <input 
+                            type="number" 
+                            id="design-cost-input" 
+                            name="designCost"
+                            min="0"
+                            step="0.01"
+                            placeholder="0.00"
+                            aria-describedby="design-cost-help"
+                        >
+                    </div>
+                    <small id="design-cost-help">One-time design or setup fee</small>
+                </div>
 
-        <label for="noi">Number of Items</label>
-        <input type="number" name="numoitem" id="noi" value="1" placeholder="Number of items" >
+                <button type="submit" class="calculate-btn">
+                    <span class="btn-icon">💰</span>
+                    Calculate Price
+                </button>
+            </form>
+        </section>
 
-        <label for="noa">Number of Appliques</label>
-        <input type="number" name="numofapp" id="noa" value="" placeholder="Number or leave blank" >
+        <section class="results" id="results-section" aria-live="polite" style="display: none;">
+            <h3>Pricing Breakdown</h3>
+            
+            <div class="price-summary">
+                <div class="total-price">
+                    <span class="price-label">Price Per Item:</span>
+                    <span class="price-amount" id="per-item-price">$0.00</span>
+                </div>
+                <div class="total-all">
+                    <span class="price-label">Total for <span id="item-count">1</span> item(s):</span>
+                    <span class="price-amount" id="total-price">$0.00</span>
+                </div>
+            </div>
 
-        <label for="bc">Blank Cost</label>
-        <input type="number" name="blacos" id="bc" value="" placeholder="Price or leave blank" >
+            <details class="breakdown-details">
+                <summary>View Detailed Breakdown</summary>
+                <dl class="price-breakdown">
+                    <div class="breakdown-item">
+                        <dt>Stitching Cost:</dt>
+                        <dd>
+                            <span id="stitch-count">0</span> stitches @ 
+                            $<span id="stitch-rate">0.50</span> per 1,000 = 
+                            $<span id="stitch-total">0.00</span>
+                        </dd>
+                    </div>
+                    
+                    <div class="breakdown-item" id="applique-breakdown" style="display: none;">
+                        <dt>Appliqué Cost:</dt>
+                        <dd>
+                            <span id="applique-count">0</span> appliqués @ 
+                            $<span id="applique-rate">1.00</span> each = 
+                            $<span id="applique-total">0.00</span>
+                        </dd>
+                    </div>
+                    
+                    <div class="breakdown-item" id="blank-breakdown" style="display: none;">
+                        <dt>Blank Item Cost:</dt>
+                        <dd>$<span id="blank-price">0.00</span></dd>
+                    </div>
+                    
+                    <div class="breakdown-item" id="insurance-breakdown" style="display: none;">
+                        <dt>Blank Insurance:</dt>
+                        <dd>
+                            <span id="insurance-rate">10</span>% of blank cost = 
+                            $<span id="insurance-total">0.00</span>
+                        </dd>
+                    </div>
+                    
+                    <div class="breakdown-item" id="design-breakdown" style="display: none;">
+                        <dt>Design/Setup Cost:</dt>
+                        <dd>$<span id="design-cost-display">0.00</span></dd>
+                    </div>
+                </dl>
+            </details>
+        </section>
+    </main>
 
-        <label for="dhc">Design/Hoop Cost</label>
-        <input type="number" name="deshoocos" id="dhc" value="" placeholder="Cost or leave blank" >        
+    <!-- Settings Modal -->
+    <div class="modal" id="settings-modal" role="dialog" aria-labelledby="settings-title" aria-hidden="true">
+        <div class="modal-content">
+            <header class="modal-header">
+                <h2 id="settings-title">Pricing Settings</h2>
+                <button class="close-btn" aria-label="Close Settings">&times;</button>
+            </header>
+            
+            <form id="settings-form">
+                <div class="form-group">
+                    <label for="stitch-rate-input">Cost per 1,000 Stitches</label>
+                    <div class="input-wrapper">
+                        <span class="currency-symbol">$</span>
+                        <input 
+                            type="number" 
+                            id="stitch-rate-input"
+                            min="0"
+                            step="0.01"
+                            value="0.50"
+                        >
+                    </div>
+                </div>
 
-        <p><a href="#" data-role="button" id="calc" ><span class="icon-coin"></span> Calculate</a></p>
-        
-        <script>
-            $('#calc').click(function() {
-                calculate();
-            });
-        </script>
-    
-        <p><a href="#popup" data-role="button" data-rel="dialog" id="setme" data-transition="pop"><span class="icon-settings"></span> Settings</a></p>
+                <div class="form-group">
+                    <label for="applique-rate-input">Cost per Appliqué</label>
+                    <div class="input-wrapper">
+                        <span class="currency-symbol">$</span>
+                        <input 
+                            type="number" 
+                            id="applique-rate-input"
+                            min="0"
+                            step="0.01"
+                            value="1.00"
+                        >
+                    </div>
+                </div>
 
+                <div class="form-group">
+                    <label for="insurance-rate-input">Blank Insurance Rate</label>
+                    <div class="input-wrapper">
+                        <input 
+                            type="number" 
+                            id="insurance-rate-input"
+                            min="0"
+                            max="100"
+                            step="0.1"
+                            value="10"
+                        >
+                        <span class="unit-symbol">%</span>
+                    </div>
+                </div>
 
-        <h1 class="grey">Embroidery Pricing</h1>
-        <span id="gTotal" class="price">Total</span>        
-        <h1 class="grey price-desc">per item</h1>
-        <br>
-        <h3 id="aTotal">(SUM)</h3>
-        <br>
-        <span id="stitches">stitches</span> stitches @ <span id="stitchcost">stitchcost</span> per 1,000 : $<span id="nosTotal">Total</span>
-        <br>
-        <span id="applique">applique(s)</span> applique(s) @ <span id="appliquecost">appliquecost</span> per 1 : $<span id="noaTotal">Total</span>
-        <br>
-        Price per blank : $<span id="blankprice">blankprice</span>
-        <br>
-        Blank insurance %<span id="blankinsurance">bi</span> of <span id="blankprice2">blankprice</span> : $<span id="bitotal">bitotal</span>
-        <br>
-        Design/Hoop Cost: $<span id="designhoopcost">dhc</span>
-        <!--
-            <p><a href="#one" data-direction="reverse" data-role="button" data-theme="b"><span class="icon-pencil"></span> Calculate Another</a></p>
-        -->
+                <div class="modal-actions">
+                    <button type="button" class="btn-secondary" id="cancel-settings">Cancel</button>
+                    <button type="submit" class="btn-primary">Save Settings</button>
+                </div>
+            </form>
+        </div>
+    </div>
 
-    </div><!-- /content -->
-
-</div><!-- /page one -->
-
-
-<!-- Start of second page: #two -->
-<div data-role="page" id="two">
-
-    
-</div><!-- /page two -->
-
-
-<!-- Start of third page: #popup -->
-<div data-role="page" id="popup">
-
-    <div data-role="header" data-theme="e">
-        <h1>Settings</h1>
-    </div><!-- /header -->
-
-    <div data-role="content" data-theme="d">
-        <h2>Global Costs</h2>
-
-        <label for="nos">Cost per 1,000 Stitches</label>
-        <input type="number" name="coststi" id="cs"  >
-
-        <label for="noa">Cost per Appliques</label>
-        <input type="number" name="costapp" id="ca" >
-
-        <label for="bi">Percentage of Insurance</label>
-        <input type="number" name="perins" id="bi"  >
-
-        <p><a href="#one" id="settings" data-rel="back" data-role="button" data-inline="true" data-icon="back">Apply Settings</a></p>
-
-        <script>
-            $('#settings').click(function() {
-                setglobals();
-            });
-        </script>
-
-
-    </div><!-- /content -->
-
-</div><!-- /page popup -->
-
+    <!-- Loading indicator -->
+    <div class="loading" id="loading" style="display: none;" role="status" aria-label="Calculating...">
+        <div class="spinner"></div>
+        <span>Calculating...</span>
+    </div>
 </body>
 </html>
