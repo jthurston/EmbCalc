@@ -225,6 +225,7 @@ small {
     border-radius: var(--radius-md);
     cursor: pointer;
     transition: all 0.2s ease;
+    color: white !important
 }
 
 #settings-btn:hover {
@@ -614,5 +615,33 @@ small {
     input[type="number"],
     .btn-secondary {
         border-width: 2px;
+    }
+}
+
+/* Side-by-side layout for large screens */
+.calculator-container {
+    display: flex;
+    gap: var(--spacing-2xl);
+    align-items: flex-start;
+}
+
+/* Make form left, results right */
+.calculator-form {
+    flex: 1 1 50%;
+}
+
+.results {
+    flex: 1 1 50%;
+}
+
+/* Responsive: stack vertically on smaller screens */
+@media (max-width: 1024px) {
+    .calculator-container {
+        flex-direction: column;
+    }
+
+    .calculator-form,
+    .results {
+        flex: 1 1 100%;
     }
 }

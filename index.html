@@ -22,152 +22,149 @@
     </header>
 
     <main>
-        <section class="calculator-form" aria-labelledby="calc-heading">
-            <h2 id="calc-heading">Embroidery Price Calculator</h2>
-            
-            <form id="embroidery-form" novalidate>
-                <div class="form-group">
-                    <label for="stitches-input">Number of Stitches *</label>
-                    <input 
-                        type="number" 
-                        id="stitches-input" 
-                        name="stitches"
-                        min="0"
-                        step="1"
-                        required
-                        aria-describedby="stitches-help"
-                        placeholder="e.g., 10000"
-                    >
-                    <small id="stitches-help">Total stitch count for the design</small>
-                    <span class="error-message" id="stitches-error" role="alert"></span>
-                </div>
-
-                <div class="form-group">
-                    <label for="items-input">Number of Items *</label>
-                    <input 
-                        type="number" 
-                        id="items-input" 
-                        name="items"
-                        min="1"
-                        step="1"
-                        value="1"
-                        required
-                        aria-describedby="items-help"
-                    >
-                    <small id="items-help">How many items to embroider</small>
-                    <span class="error-message" id="items-error" role="alert"></span>
-                </div>
-
-                <div class="form-group">
-                    <label for="appliques-input">Number of Appliqués</label>
-                    <input 
-                        type="number" 
-                        id="appliques-input" 
-                        name="appliques"
-                        min="0"
-                        step="1"
-                        placeholder="0"
-                        aria-describedby="appliques-help"
-                    >
-                    <small id="appliques-help">Optional: Number of appliqué pieces</small>
-                </div>
-
-                <div class="form-group">
-                    <label for="blank-cost-input">Blank Item Cost</label>
-                    <div class="input-wrapper">
-                        <span class="currency-symbol">$</span>
+        <div class="calculator-container">
+            <section class="calculator-form" aria-labelledby="calc-heading">
+                <h2 id="calc-heading">Embroidery Price Calculator</h2>
+                
+                <form id="embroidery-form" novalidate>
+                    <div class="form-group">
+                        <label for="stitches-input">Number of Stitches *</label>
                         <input 
                             type="number" 
-                            id="blank-cost-input" 
-                            name="blankCost"
+                            id="stitches-input" 
+                            name="stitches"
                             min="0"
-                            step="0.01"
-                            placeholder="0.00"
-                            aria-describedby="blank-cost-help"
+                            step="1"
+                            required
+                            aria-describedby="stitches-help"
+                            placeholder="e.g., 10000"
                         >
+                        <small id="stitches-help">Total stitch count for the design</small>
+                        <span class="error-message" id="stitches-error" role="alert"></span>
                     </div>
-                    <small id="blank-cost-help">Cost per blank item (shirt, hat, etc.)</small>
-                </div>
 
-                <div class="form-group">
-                    <label for="design-cost-input">Design/Setup Cost</label>
-                    <div class="input-wrapper">
-                        <span class="currency-symbol">$</span>
+                    <div class="form-group">
+                        <label for="items-input">Number of Items *</label>
                         <input 
                             type="number" 
-                            id="design-cost-input" 
-                            name="designCost"
-                            min="0"
-                            step="0.01"
-                            placeholder="0.00"
-                            aria-describedby="design-cost-help"
+                            id="items-input" 
+                            name="items"
+                            min="1"
+                            step="1"
+                            value="1"
+                            required
+                            aria-describedby="items-help"
                         >
+                        <small id="items-help">How many items to embroider</small>
+                        <span class="error-message" id="items-error" role="alert"></span>
                     </div>
-                    <small id="design-cost-help">One-time design or setup fee</small>
+
+                    <div class="form-group">
+                        <label for="appliques-input">Number of Appliqués</label>
+                        <input 
+                            type="number" 
+                            id="appliques-input" 
+                            name="appliques"
+                            min="0"
+                            step="1"
+                            placeholder="0"
+                            aria-describedby="appliques-help"
+                        >
+                        <small id="appliques-help">Optional: Number of appliqué pieces</small>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="blank-cost-input">Blank Item Cost</label>
+                        <div class="input-wrapper">
+                            <span class="currency-symbol">$</span>
+                            <input 
+                                type="number" 
+                                id="blank-cost-input" 
+                                name="blankCost"
+                                min="0"
+                                step="0.01"
+                                placeholder="0.00"
+                                aria-describedby="blank-cost-help"
+                            >
+                        </div>
+                        <small id="blank-cost-help">Cost per blank item (shirt, hat, etc.)</small>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="design-cost-input">Design/Setup Cost</label>
+                        <div class="input-wrapper">
+                            <span class="currency-symbol">$</span>
+                            <input 
+                                type="number" 
+                                id="design-cost-input" 
+                                name="designCost"
+                                min="0"
+                                step="0.01"
+                                placeholder="0.00"
+                                aria-describedby="design-cost-help"
+                            >
+                        </div>
+                        <small id="design-cost-help">One-time design or setup fee</small>
+                    </div>               
+                </form>
+            </section>
+
+            <section class="results" id="results-section" aria-live="polite" style="display: none;">
+                <h3>Pricing Breakdown</h3>
+                
+                <div class="price-summary">
+                    <div class="total-price">
+                        <span class="price-label">Price Per Item:</span>
+                        <span class="price-amount" id="per-item-price">$0.00</span>
+                    </div>
+                    <div class="total-all">
+                        <span class="price-label">Total for <span id="item-count">1</span> item(s):</span>
+                        <span class="price-amount" id="total-price">$0.00</span>
+                    </div>
                 </div>
 
-                <button type="submit" class="calculate-btn">
-                    <span class="btn-icon">💰</span>
-                    Calculate Price
-                </button>
-            </form>
-        </section>
-
-        <section class="results" id="results-section" aria-live="polite" style="display: none;">
-            <h3>Pricing Breakdown</h3>
-            
-            <div class="price-summary">
-                <div class="total-price">
-                    <span class="price-label">Price Per Item:</span>
-                    <span class="price-amount" id="per-item-price">$0.00</span>
-                </div>
-                <div class="total-all">
-                    <span class="price-label">Total for <span id="item-count">1</span> item(s):</span>
-                    <span class="price-amount" id="total-price">$0.00</span>
-                </div>
-            </div>
-
-            <details class="breakdown-details">
-                <summary>View Detailed Breakdown</summary>
-                <dl class="price-breakdown">
-                    <div class="breakdown-item">
-                        <dt>Stitching Cost:</dt>
-                        <dd>
-                            <span id="stitch-count">0</span> stitches @ 
-                            $<span id="stitch-rate">0.50</span> per 1,000 = 
-                            $<span id="stitch-total">0.00</span>
-                        </dd>
-                    </div>
-                    
-                    <div class="breakdown-item" id="applique-breakdown" style="display: none;">
-                        <dt>Appliqué Cost:</dt>
-                        <dd>
-                            <span id="applique-count">0</span> appliqués @ 
-                            $<span id="applique-rate">1.00</span> each = 
-                            $<span id="applique-total">0.00</span>
-                        </dd>
-                    </div>
-                    
-                    <div class="breakdown-item" id="blank-breakdown" style="display: none;">
-                        <dt>Blank Item Cost:</dt>
-                        <dd>$<span id="blank-price">0.00</span></dd>
-                    </div>
-                    
-                    <div class="breakdown-item" id="insurance-breakdown" style="display: none;">
-                        <dt>Blank Insurance:</dt>
-                        <dd>
-                            <span id="insurance-rate">10</span>% of blank cost = 
-                            $<span id="insurance-total">0.00</span>
-                        </dd>
-                    </div>
-                    
-                    <div class="breakdown-item" id="design-breakdown" style="display: none;">
-                        <dt>Design/Setup Cost:</dt>
-                        <dd>$<span id="design-cost-display">0.00</span></dd>
-                    </div>
-                </dl>
-            </details>
-        </section>
+                <details class="breakdown-details">
+                    <summary>View Detailed Breakdown</summary>
+                    <dl class="price-breakdown">
+                        <div class="breakdown-item">
+                            <dt>Stitching Cost:</dt>
+                            <dd>
+                                <span id="stitch-count">0</span> stitches @ 
+                                $<span id="stitch-rate">0.50</span> per 1,000 = 
+                                $<span id="stitch-total">0.00</span>
+                            </dd>
+                        </div>
+                        
+                        <div class="breakdown-item" id="applique-breakdown" style="display: none;">
+                            <dt>Appliqué Cost:</dt>
+                            <dd>
+                                <span id="applique-count">0</span> appliqués @ 
+                                $<span id="applique-rate">1.00</span> each = 
+                                $<span id="applique-total">0.00</span>
+                            </dd>
+                        </div>
+                        
+                        <div class="breakdown-item" id="blank-breakdown" style="display: none;">
+                            <dt>Blank Item Cost:</dt>
+                            <dd>$<span id="blank-price">0.00</span></dd>
+                        </div>
+                        
+                        <div class="breakdown-item" id="insurance-breakdown" style="display: none;">
+                            <dt>Blank Insurance:</dt>
+                            <dd>
+                                <span id="insurance-rate">10</span>% of blank cost = 
+                                $<span id="insurance-total">0.00</span>
+                            </dd>
+                        </div>
+                        
+                        <div class="breakdown-item" id="design-breakdown" style="display: none;">
+                            <dt>Design/Setup Cost:</dt>
+                            <dd>$<span id="design-cost-display">0.00</span></dd>
+                        </div>
+                    </dl>
+                </details>
+            </section>
+        </div>
     </main>
 
     <!-- Settings Modal -->

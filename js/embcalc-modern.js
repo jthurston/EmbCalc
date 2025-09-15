@@ -1,6 +1,7 @@
 /**
  * Modern EmbCalc - Embroidery Price Calculator
  * Replaces jQuery Mobile with modern vanilla JavaScript
+ * Auto-calculates on input changes (no calculate button)
  */
 
 class EmbroideryCalculator {
@@ -55,12 +56,20 @@ class EmbroideryCalculator {
 
     // Initialize all event listeners
     initializeEventListeners() {
-        // Form submission
         const form = document.getElementById('embroidery-form');
+
+        // Auto-calculate when any input changes
         if (form) {
-            form.addEventListener('submit', (e) => {
-                e.preventDefault();
-                this.calculatePrice();
+            const inputs = form.querySelectorAll('input[type="number"]');
+            inputs.forEach(input => {
+                input.addEventListener('input', () => {
+                    this.validateInput(input);
+                    this.calculatePrice();
+                });
+                input.addEventListener('blur', () => {
+                    this.validateInput(input);
+                    this.calculatePrice();
+                });
             });
         }
 
@@ -88,21 +97,10 @@ class EmbroideryCalculator {
             this.saveSettingsFromForm();
         });
 
-        // Real-time input validation
-        const inputs = form?.querySelectorAll('input[type="number"]');
-        inputs?.forEach(input => {
-            input.addEventListener('input', () => this.validateInput(input));
-            input.addEventListener('blur', () => this.validateInput(input));
-        });
-
         // Keyboard shortcuts
         document.addEventListener('keydown', (e) => {
             if (e.ctrlKey || e.metaKey) {
                 switch(e.key) {
-                    case 'Enter':
-                        e.preventDefault();
-                        this.calculatePrice();
-                        break;
                     case ',':
                         e.preventDefault();
                         this.openSettingsModal();
@@ -156,11 +154,8 @@ class EmbroideryCalculator {
     }
 
     // Calculate embroidery price
-    async calculatePrice() {
+    calculatePrice() {
         try {
-            // Show loading state
-            this.showLoading(true);
-
             // Get and validate inputs
             const formData = this.getFormData();
             if (!formData) {
@@ -179,8 +174,6 @@ class EmbroideryCalculator {
         } catch (error) {
             console.error('Calculation error:', error);
             this.showError('An error occurred during calculation. Please try again.');
-        } finally {
-            this.showLoading(false);
         }
     }
 
@@ -200,7 +193,6 @@ class EmbroideryCalculator {
         });
 
         if (!isValid) {
-            this.showError('Please correct the errors above before calculating.');
             return null;
         }
 
@@ -295,19 +287,12 @@ class EmbroideryCalculator {
         }).format(amount);
     }
 
-    showLoading(show) {
-        const loading = document.getElementById('loading');
-        if (loading) {
-            loading.style.display = show ? 'flex' : 'none';
-        }
-    }
-
     showResults(show) {
         const results = document.getElementById('results-section');
         if (results) {
             results.style.display = show ? 'block' : 'none';
             if (show) {
-                results.scrollIntoView({ behavior: 'smooth' });
+                //results.scrollIntoView({ behavior: 'smooth' });
             }
         }
     }
@@ -381,6 +366,7 @@ class EmbroideryCalculator {
         
         // Show success message
         this.showSuccess('Settings saved successfully!');
+        this.calculatePrice(); // Recalculate with new settings
     }
 
     showSuccess(message) {
